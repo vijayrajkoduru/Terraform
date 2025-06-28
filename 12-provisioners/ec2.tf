@@ -2,6 +2,8 @@ resource "aws_instance" "roboshop" {
   ami           = var.ami_id # left and right side names no need to be same
   instance_type = var.instance_type
   vpc_security_group_ids = [ aws_security_group.allow_all.id ]
+  key_name      = "my-keypairmy-keypair"  # MUST specify existing key pair
+  associate_public_ip_address = true    # Ensure public IP is assigned
   
   tags = var.ec2_tags
 
@@ -20,6 +22,8 @@ resource "aws_instance" "roboshop" {
     user     = "ec2-user"
     password = "DevOps321"
     host     = self.public_ip
+    private_key = file("key.pem")  # This is your local key file
+    timeout     = "5m"
   }
 
   provisioner "remote-exec" {
