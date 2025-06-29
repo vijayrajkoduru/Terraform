@@ -1,45 +1,47 @@
-variable "ami_id" {
+variable "region" {
+  description = "AWS region to deploy resources in"
   type        = string
-  default     = "ami-09c813fb71547fc4f"
-  description = "AMI ID of joindevops RHEL9"
+  default     = "us-east-1"
+}
+
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "public_subnet_cidr" {
+  description = "CIDR block for the public subnet"
+  type        = string
+  default     = "10.0.1.0/24"
+}
+
+variable "availability_zone" {
+  description = "Availability zone for the subnet"
+  type        = string
+  default     = "us-east-1a"
+}
+
+variable "key_name" {
+  description = "Name for the SSH key pair"
+  type        = string
+  default     = "count"
+}
+
+variable "public_key_path" {
+  description = "Path to the public key file"
+  type        = string
+  default     = "~/.ssh/count.pub" # Change as needed
+}
+
+variable "ami_id" {
+  description = "AMI ID for the EC2 instance"
+  type        = string
+  default     = "ami-09c813fb71547fc4f" # RHEL 9
 }
 
 variable "instance_type" {
-  default = "t3.micro"
-}
-
-variable "ec2_tags" {
-    type = map(string)
-    default = {
-        Name = "HelloWorld"
-        Purpose = "variables-demo"
-    }
-}
-
-variable "sg_name" {
-    default = "allow-all"
-}
-
-variable "sg_description" {
-    default = "allowing all ports from internet"
-}
-
-variable "from_port" {
-    default = 0
-}
-
-variable "to_port" {
-    type = number
-    default = 0
-}
-
-variable "cidr_blocks" {
-    type = list(string)
-    default = ["0.0.0.0/0"]
-}
-
-variable "sg_tags" {
-    default = {
-        Name = "allow-all"
-    }
+  description = "EC2 instance type"
+  type        = string
+  default     = "t2.micro"
 }

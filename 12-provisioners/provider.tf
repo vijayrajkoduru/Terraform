@@ -9,7 +9,7 @@ terraform {
   
   backend "s3" {
     bucket         = "expense-project-1"
-    key            = "VPN"
+    key            = "newone"
     region         = "us-east-1"
     encrypt = true
     use_lockfile = true
