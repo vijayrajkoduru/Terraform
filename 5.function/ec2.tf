@@ -1,5 +1,5 @@
 resource "aws_instance" "project" {
-    
+    count = 3
     ami = var.ami_id
     vpc_security_group_ids = [aws_security_group.Hacking.id]
     instance_type = var.environment == "dev" ? "t3.micro" : "t3.small"
