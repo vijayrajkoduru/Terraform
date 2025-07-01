@@ -6,7 +6,7 @@ resource "aws_instance" "creating" {
   tags = var.ec2_tags
 
   provisioner "local-exec" {
-    command = "${self.private_ip} > inventory"
+    command = "${self.private_ip} >> inventory"
     on_failure = continue #ignoring errors
   }
 
@@ -23,16 +23,21 @@ resource "aws_instance" "creating" {
   }
 
   provisioner "remote-exec" {
-    inline = [
-      "sudo dnf install nginx -y",
-      "sudo systemctl start nginx",
-    ]
-  }
+  inline = [
+    "sudo dnf -y install dnf-plugins-core",
+    "sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo",
+    "sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y",
+    "sudo systemctl start docker",
+    "sudo systemctl enable docker",
+    "sudo dnf install nginx -y",
+    "sudo systemctl start nginx"
+  ]
+}
 
   provisioner "remote-exec" {
     when = destroy
     inline = [
-      "sudo systemctl stop nginx"
+      "sudo systemctl stop nginx || true"
     ]
   }
 }

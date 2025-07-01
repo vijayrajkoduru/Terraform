@@ -11,7 +11,7 @@ variable "instance_type" {
 variable "ec2_tags" {
     type = map(string)
     default = {
-        Name = "HelloWorld"
+        Name = "docker"
         Purpose = "variables-demo"
     }
 }
@@ -27,6 +27,7 @@ variable "sg_description" {
 variable "from_port" {
     default = 0
 }
+
 
 variable "to_port" {
     type = number
