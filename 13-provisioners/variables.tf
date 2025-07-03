@@ -11,7 +11,7 @@ variable "instance_type" {
 variable "ec2_tags" {
     type = map(string)
     default = {
-        Name = "docker"
+        Name = "checkingr"
         Purpose = "variables-demo"
     }
 }
