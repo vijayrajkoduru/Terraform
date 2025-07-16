@@ -1,6 +1,6 @@
 resource "aws_instance" "project" {
     ami = var.ami_id
-    vpc_security_group_ids = [aws_security_group.Hackouting.id]
+    vpc_security_group_ids = [aws_security_group.Hack-out.id]
     instance_type = var.instance_type
     
 tags ={
@@ -8,9 +8,9 @@ tags ={
 }
 }
 
-resource "aws_security_group" "Hackouting" {
-    name = "Hackouting"
-    vpc_id      = var.vpc_id
+resource "aws_security_group" "Hack-out" {
+    name = "Hack-out"
+    
 
     ingress{
         from_port = 0

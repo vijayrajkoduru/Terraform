@@ -7,10 +7,5 @@ variable "instance_type" {
 
 }
 
-variable "vpc_id" {
-  default = "vpc-0d6baaf01cae0937c"
-  
-}
-
 
 
